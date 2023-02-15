@@ -11,18 +11,24 @@ from detect_track import run
 content = ''
 uploadedfilename = ''
 
+
 #BEGIN MODEL SECTION
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='Checkpoints/bdd100Kv3.pt')  # local model
+@st.cache_resource
+def Load_Yolov5_Model():
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path='Checkpoints/bdd100Kv3.pt')  # local model
 
-# set model parameters
-model.conf = 0.25  # NMS confidence threshold
-model.iou = 0.45  # NMS IoU threshold
-model.agnostic = False  # NMS class-agnostic
-model.multi_label = False  # NMS multiple labels per box
-model.max_det = 1000  # maximum number of detections per image
-model.eval()
-
+    # set model parameters
+    model.conf = 0.25  # NMS confidence threshold
+    model.iou = 0.45  # NMS IoU threshold
+    model.agnostic = False  # NMS class-agnostic
+    model.multi_label = False  # NMS multiple labels per box
+    model.max_det = 1000  # maximum number of detections per image
+    model.eval()
+    return model
 #END MODEL SECTION
+
+#Load Model
+model = Load_Yolov5_Model()
 
 #BEGIN CODE SECTION
 def detect_image(imagefile):
@@ -128,8 +134,10 @@ with st.sidebar:
         model.iou = iou_thres
         task_selection = st.radio("Task Selection", ('Detect', 'Track'), 0)
 
-        detect_track_btn = st.button("Detect/Track")
-        #trackbtn = st.button("Track")
+        if task_selection == 'Detect':
+            track_btn = st.button("Detect")
+        else:
+            track_btn = st.button("Track")
         
         if uploadedfilename != '':
             if 'video' in file_type:
@@ -144,7 +152,7 @@ with st.sidebar:
         metrics = st.checkbox("Show Metrics", key="disabled")
 
 
-if detect_track_btn:
+if track_btn:
     if uploadedfilename != '':
         if 'video' in file_type:
             st.header("Processed Video")
