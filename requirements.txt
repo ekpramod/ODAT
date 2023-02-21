@@ -1,4 +1,3 @@
-pip install --upgrade pip
 absl-py==1.4.0
 altair==4.2.2
 asttokens==2.2.1
