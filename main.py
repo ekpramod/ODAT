@@ -94,7 +94,7 @@ def detect_video(videofile):
     video.release()
     out.release()
     buffer.close()
-    with open("generatedvideo.mp4", "rb") as f:
+    with open(generatedvideo, "rb") as f:
         contents = f.read()  # file contents could be already fully loaded into RAM
 
     cv2.destroyAllWindows()
