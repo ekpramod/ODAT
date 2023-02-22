@@ -72,7 +72,7 @@ def detect_video(videofile):
     while video.isOpened():
         i += 1
         ret, frame = video.read()
-        wait_ind.progress((i-1/totalFrames), text=progress_text)
+        wait_ind.progress((i-1)/totalFrames, text=progress_text)
         if ret:
             image_updated = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = model(image_updated)
