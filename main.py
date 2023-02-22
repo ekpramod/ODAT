@@ -65,7 +65,7 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideo = 'Detected/generatedvideo.mp4'
+    generatedvideo = '/Detected/generatedvideo.mp4'
     
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
