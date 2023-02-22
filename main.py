@@ -50,7 +50,7 @@ def detect_video(videofile):
             shutil.copyfileobj(videofile, buffer)
     filepath = f'{videofile.name}'
     cwd = os.getcwd()
-    generatedvideo = "odat/app/generatedvideo.mp4"
+    generatedvideo = "generatedvideo.mp4"
     print(generatedvideo)
     
     # Open the video file
@@ -96,12 +96,12 @@ def detect_video(videofile):
     video.release()
     out.release()
     buffer.close()
-    with open('odat/app/generatedvideo.mp4', "rb") as f:
+    with open(generatedvideo, "rb") as f:
         contents = f.read()  # file contents could be already fully loaded into RAM
 
     cv2.destroyAllWindows()
     os.remove(filepath)
-    os.remove("generatedvideo.mp4")
+    os.remove(generatedvideo)
     return contents
 
 
