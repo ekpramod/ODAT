@@ -51,6 +51,8 @@ def detect_video(videofile):
     filepath = f'{videofile.name}'
     cwd = os.getcwd()
     generatedvideo = cwd + "/generatedvideo.mp4"
+    print(generatedvideo)
+    
     # Open the video file
     video = cv2.VideoCapture(filepath)
     totalFrames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
