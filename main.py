@@ -11,11 +11,14 @@ from detect_track import run
 content = ''
 uploadedfilename = ''
 
-
 #BEGIN MODEL SECTION
-@st.cache_resource
+@st.cache_resource(ttl=1200)
+def download_model_file():
+    torch.hub.download_url_to_file('https://onedrive.live.com/download?cid=D851855CC499D6A9&resid=D851855CC499D6A9%21526&authkey=AKiGJLac26dOsBE', 'bdd100Kv3.pt', hash_prefix=None, progress=True)
+
+@st.cache_resource(ttl=7200)
 def Load_Yolov5_Model():
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path='app/Checkpoints/bdd100Kv3.pt')  # local model
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path='bdd100Kv3.pt')  # local model
 
     # set model parameters
     model.conf = 0.25  # NMS confidence threshold
@@ -24,11 +27,15 @@ def Load_Yolov5_Model():
     model.multi_label = False  # NMS multiple labels per box
     model.max_det = 1000  # maximum number of detections per image
     model.eval()
+    
     return model
-#END MODEL SECTION
+
+#Download Model file
+download_model_file()
 
 #Load Model
 model = Load_Yolov5_Model()
+#END MODEL SECTION
 
 #BEGIN CODE SECTION
 def detect_image(imagefile):
@@ -51,6 +58,7 @@ def detect_video(videofile):
 
     # Open the video file
     video = cv2.VideoCapture(filepath)
+    totalFrames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # Get the video frame dimensions
     frame_width = int(video.get(3))
@@ -62,10 +70,14 @@ def detect_video(videofile):
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
     out = cv2.VideoWriter(generatedvideo, fourcc, fps, (frame_width, frame_height))
+    
+    progress_text = "Video Frames being detected."
+    wait_ind = st.progress(0, text=progress_text)
 
     i = 0
     # Loop over each frame
     while video.isOpened():
+        wait_ind.progress((i-1)/totalFrames, text=progress_text)
         i += 1
         ret, frame = video.read()
         if ret:
@@ -150,9 +162,6 @@ with st.sidebar:
                 original_image = st.image(content)
             else:
                 st.header("Invalid File Format")
-
-        metrics = st.checkbox("Show Metrics", key="disabled")
-
 
 if track_btn:
     if uploadedfilename != '':
