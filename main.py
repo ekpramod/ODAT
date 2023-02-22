@@ -50,7 +50,7 @@ def detect_video(videofile):
             shutil.copyfileobj(videofile, buffer)
     filepath = f'{videofile.name}'
     cwd = os.getcwd()
-    generatedvideo = "generatedvideo.mp4"
+    generatedvideo = 'Detected/generatedvideo.mp4'
     print(generatedvideo)
     
     # Open the video file
