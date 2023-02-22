@@ -64,7 +64,7 @@ def detect_video(videofile):
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
     out = cv2.VideoWriter(generatedvideo, fourcc, fps, (frame_width, frame_height))
     
-    progress_text = "Frame being detected."
+    progress_text = "Video Frames being detected."
     wait_ind = st.progress(0, text=progress_text)
 
     i = 0
