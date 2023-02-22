@@ -53,6 +53,7 @@ def detect_video(videofile):
     generatedvideo = cwd + "/generatedvideo.mp4"
     # Open the video file
     video = cv2.VideoCapture(filepath)
+    totalFrames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # Get the video frame dimensions
     frame_width = int(video.get(3))
@@ -71,7 +72,7 @@ def detect_video(videofile):
     while video.isOpened():
         i += 1
         ret, frame = video.read()
-        wait_ind.progress(i, text=progress_text)
+        wait_ind.progress((i-1/totalFrames)*100, text=progress_text)
         if ret:
             image_updated = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = model(image_updated)
