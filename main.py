@@ -65,7 +65,7 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideo = '/Detected/generatedvideo.mp4'
+    generatedvideo = './Detected/generatedvideo.mp4'
     
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
@@ -97,8 +97,9 @@ def detect_video(videofile):
         else:
             break
 
-    with open(generatedvideo, "rb") as f:
-        contents = f.read()  # file contents could be already fully loaded into RAM
+    if os.path.exists('/Detected'):
+        with open(generatedvideo, "rb") as f:
+            contents = f.read()  # file contents could be already fully loaded into RAM
 
     # Release the video and VideoWriter objects
     video.release()
