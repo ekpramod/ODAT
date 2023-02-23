@@ -74,7 +74,7 @@ def detect_video(videofile):
     generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'h264')
+    fourcc = cv2.VideoWriter_fourcc(*'x264')
     out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height))
     
     progress_text = "Video Frames being detected."
@@ -126,7 +126,7 @@ def track_video(videofile):
             shutil.copyfileobj(videofile, buffer)
 
     filepath = f'{videofile.name}'
-    savePath = run(weights='Checkpoints/bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
+    savePath = run(weights='bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
     # startfile(savePath)
     extension = filepath.split(".")[1]
     with open(savePath, "rb") as f:
