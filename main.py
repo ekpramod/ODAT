@@ -16,7 +16,11 @@ root = os.getcwd()
 def AppRootDir():
     os.chdir(root)
     return root
-
+    
+def VideoDir():
+    os.chdir( root + '/Detected')
+    return root + '/Detected'    
+    
 #BEGIN MODEL SECTION
 @st.cache_resource(ttl=1200)
 def download_model_file():
@@ -96,6 +100,9 @@ def detect_video(videofile):
                 detected_frame = cv2.imread('runs/detect/exp/image0.jpg')
                 out.write(detected_frame)
                 shutil.rmtree("runs/")
+                dir_list = os.listdir(VideoDir())
+                st.write(dir_list)
+                AppRootDir()
 
             # Break the loop if the "q" key is pressed
             if cv2.waitKey(25) & 0xFF == ord('q'):
@@ -103,6 +110,7 @@ def detect_video(videofile):
         else:
             break
 
+    contents = ''
     if os.path.exists(generatedvideofile):
         with open(generatedvideofile, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
