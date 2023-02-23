@@ -18,6 +18,6 @@ for i in range(10):
      f.write("This is line %d\r\n" % (i+1))
      
 f.close()     
-
-dir_list = os.listdir(cwd + '/Detected')
+os.chdir( cwd + '/Detected')
+dir_list = os.listdir()
 print(dir_list)
