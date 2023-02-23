@@ -2,5 +2,7 @@ import io
 import os
 import shutil
 
-
-print(os.listdir())
+cwd = os.cwd()
+dir = os.listdir(cwd)
+print(cwd)
+print(dir)
