@@ -71,11 +71,11 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.avi"
+    generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height))
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height),True)
     
     progress_text = "Video Frames being detected."
     wait_ind = st.progress(0, text=progress_text)
