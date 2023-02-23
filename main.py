@@ -74,7 +74,7 @@ def detect_video(videofile):
     generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
+    fourcc = cv2.VideoWriter_fourcc(*'h264')
     out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height))
     
     progress_text = "Video Frames being detected."
@@ -115,12 +115,8 @@ def detect_video(videofile):
     cv2.destroyAllWindows()
     
     #remove temporary files
-    os.remove(filepath)
-    
-    dir_list = os.listdir(AppRootDir())
-    st.write(dir_list)
-    
-    #os.remove(generatedvideofile)
+    os.remove(filepath)    
+    os.remove(generatedvideofile)
     
     return contents
 
