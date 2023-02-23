@@ -71,12 +71,12 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideoavifile = "generatedvideo.avi"
+    #generatedvideoavifile = "generatedvideo.avi"
     generatedvideomp4file = "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter(generatedvideoavifile, fourcc, fps, (frame_width, frame_height),True)
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    out = cv2.VideoWriter(generatedvideomp4file, fourcc, fps, (frame_width, frame_height),True)
     
     progress_text = "Video Frames being detected."
     wait_ind = st.progress(0, text=progress_text)
@@ -104,8 +104,8 @@ def detect_video(videofile):
             break
 
     contents = ''
-    if os.path.exists(generatedvideoavifile):
-        converttomp4('generatedvideo') # video name without extension convert to mp4 format
+    if os.path.exists(generatedvideomp4file):
+        #converttomp4('generatedvideo') # video name without extension convert to mp4 format
         with open(generatedvideomp4file, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
 
@@ -117,7 +117,7 @@ def detect_video(videofile):
     
     #remove temporary files
     os.remove(filepath)    
-    os.remove(generatedvideoavifile)
+    #os.remove(generatedvideoavifile)
     os.remove(generatedvideomp4file)
     
     return contents
