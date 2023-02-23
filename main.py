@@ -19,5 +19,5 @@ for i in range(10):
      
 f.close()     
 
-dir_list = os.listdir('Detected')
+dir_list = os.listdir('/Detected')
 print(dir_list)
