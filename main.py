@@ -5,7 +5,7 @@ import shutil
 import streamlit as st
 
 root = os.getcwd()
-dir_list = os.listdir(cwd)
+dir_list = os.listdir(root)
 
 def AppRootDir():
     return root
