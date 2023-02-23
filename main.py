@@ -8,10 +8,10 @@ root = os.getcwd()
 dir_list = os.listdir(root)
 
 def AppRootDir():
-    return root
+    return os.chdir(root)
 
 def VideoDir():
-    return os.chdir( AppRootDir() + '/Detected') 
+    return os.chdir( root + '/Detected') 
 
 def WriteTextFile():
     VideoDir()
