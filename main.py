@@ -8,4 +8,4 @@ import streamlit as st
 import numpy as np
 from detect_track import run
 
-print(os.listdie())
+print(os.listdir())
