@@ -5,8 +5,8 @@ import streamlit as st
 
 cwd = os.getcwd()
 dir = os.listdir(cwd)
-print(cwd)
-print(dir)
+print(cwd,flush)
+print(dir,flush)
 
 st.write("Hello")
 
