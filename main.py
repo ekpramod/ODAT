@@ -11,7 +11,7 @@ def AppRootDir():
     return root
 
 def VideoDir():
-    return os.chdir( cwd + '/Detected') 
+    return os.chdir( AppRootDir() + '/Detected') 
 
 def WriteTextFile():
     VideoDir()
