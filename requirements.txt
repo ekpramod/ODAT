@@ -114,4 +114,4 @@ Werkzeug==2.2.3
 wrapt==1.14.1
 yolov5==7.0.9
 zipp==3.14.0
-moviepy=1.0.3
+moviepy==1.0.3
