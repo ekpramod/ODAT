@@ -5,13 +5,14 @@ import shutil
 import streamlit as st
 
 root = os.getcwd()
-dir_list = os.listdir(root)
 
 def AppRootDir():
-    return os.chdir(root)
+    os.chdir(root)
+    return root
 
 def VideoDir():
-    return os.chdir( root + '/Detected') 
+    os.chdir( root + '/Detected')
+    return root + '/Detected'    
 
 def WriteTextFile():
     VideoDir()
@@ -23,16 +24,15 @@ def WriteTextFile():
     f.close()     
 
         
-AppRootDir()
-dir_list = os.listdir()
+dir_list = os.listdir(AppRootDir())
 st.write(dir_list)
 
-VideoDir()
-dir_list = os.listdir()
+WriteTextFile()
+
+dir_list = os.listdir(VideoDir())
 st.write(dir_list)
 
-AppRootDir()
-dir_list = os.listdir()
+dir_list = os.listdir(AppRootDir())
 st.write(dir_list)
 
    
