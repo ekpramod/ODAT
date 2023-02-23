@@ -7,15 +7,10 @@ import cv2
 import streamlit as st
 import numpy as np
 from detect_track import run
+import moviepy.editor as moviepy
 
 content = ''
 uploadedfilename = ''
-
-root = os.getcwd()
-
-def AppRootDir():
-    os.chdir(root)
-    return root
         
 #BEGIN MODEL SECTION
 @st.cache_resource(ttl=1200)
@@ -43,6 +38,11 @@ download_model_file()
 model = Load_Yolov5_Model()
 #END MODEL SECTION
 
+def converttomp4(video):
+    clip = moviepy.VideoFileClip(video + '.avi')
+    clip.write_videofile(video + '.mp4')
+    
+   
 #BEGIN CODE SECTION
 def detect_image(imagefile):
     image = cv2.imdecode(np.frombuffer(imagefile, np.uint8), cv2.IMREAD_COLOR)
@@ -71,10 +71,11 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
+    generatedvideoavifile = "generatedvideo.avi"
+    generatedvideomp4file = "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
     out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height),True)
     
     progress_text = "Video Frames being detected."
@@ -90,7 +91,6 @@ def detect_video(videofile):
             image_updated = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = model(image_updated)
             results.render()
-            print(f"Frame{i} : {results}")
             results.save()
             if os.path.exists('runs/detect/exp'):
                 detected_frame = cv2.imread('runs/detect/exp/image0.jpg')
@@ -104,8 +104,9 @@ def detect_video(videofile):
             break
 
     contents = ''
-    if os.path.exists(generatedvideofile):
-        with open(generatedvideofile, "rb") as f:
+    if os.path.exists(generatedvideoavifile):
+        converttomp4('generatedvideo') # video name without extension convert to mp4 format
+        with open(generatedvideomp4file, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
 
     # Release the video and VideoWriter objects
@@ -116,7 +117,8 @@ def detect_video(videofile):
     
     #remove temporary files
     os.remove(filepath)    
-    os.remove(generatedvideofile)
+    os.remove(generatedvideoavifile)
+    os.remove(generatedvideomp4file)
     
     return contents
 
