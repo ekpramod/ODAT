@@ -103,7 +103,7 @@ def detect_video(videofile):
         else:
             break
 
-    if os.path.exists(generatedvideo):
+    if os.path.exists(generatedvideofile):
         with open(generatedvideofile, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
 
