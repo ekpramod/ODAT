@@ -9,5 +9,6 @@ dir_list = os.listdir(cwd)
 print(cwd)
 print(dir_list)
 
-st.write("Hello")
+st.write(cwd)
+st.write(dir_list)
 
