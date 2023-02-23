@@ -115,7 +115,11 @@ def detect_video(videofile):
     
     #remove temporary files
     os.remove(filepath)
-    os.remove(generatedvideofile)
+    
+    dir_list = os.listdir(AppRootDir())
+    st.write(dir_list)
+    
+    #os.remove(generatedvideofile)
     
     return contents
 
