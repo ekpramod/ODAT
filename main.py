@@ -38,6 +38,8 @@ st.write(dir_list)
 
 f = os.remove(AppRootDir() + "/Detected/" + "guru99.txt")   
 
-dir_list = os.listdir(AppRootDir())
+dir_list = os.listdir(VideoDir())
 st.write(dir_list)
+
+AppRootDir()
     
