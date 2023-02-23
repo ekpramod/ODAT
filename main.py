@@ -21,7 +21,7 @@ def VideoDir():
     os.chdir( root + '/Detected')
     return root + '/Detected'  
 
-def testDir() 
+def testDir(): 
     os.chdir( root + '/runs/detect/exp')
     st.write(os.listdir())
     return root + '/runs/detect/exp'  
