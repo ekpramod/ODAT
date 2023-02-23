@@ -71,10 +71,10 @@ def detect_video(videofile):
     frame_height = int(video.get(4))
     fps = video.get(cv2.CAP_PROP_FPS)
 
-    generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
+    generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.avi"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'x264')
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height))
     
     progress_text = "Video Frames being detected."
