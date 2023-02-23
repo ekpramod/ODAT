@@ -58,13 +58,13 @@ def detect_image(imagefile):
     image_updated = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = model(image_updated)
     results.print()
-    results.render()  # updates results.imgs with boxes and labels
-    for img in results.ims:
-        bytes_io = io.BytesIO()
         img_base64 = Image.fromarray(img)
         img_base64.save(bytes_io, format="jpeg")
     return bytes_io.getvalue()
 
+    results.render()  # updates results.imgs with boxes and labels
+    for img in results.ims:
+        bytes_io = io.BytesIO()
 
 def detect_video(videofile):
     with open(videofile.name, "wb") as buffer:
@@ -83,7 +83,7 @@ def detect_video(videofile):
     generatedvideofile = AppRootDir() + "/Detected/" + "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(generatedvideofile, fourcc, fps, (frame_width, frame_height))
     
     progress_text = "Video Frames being detected."
