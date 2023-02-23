@@ -12,7 +12,7 @@ print(dir_list)
 st.write(cwd)
 st.write(dir_list)
 
-f= open("Detected/guru99.txt","w+")
+f= open("/Detected/guru99.txt","w+")
 
 for i in range(10):
      f.write("This is line %d\r\n" % (i+1))
