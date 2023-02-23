@@ -7,13 +7,13 @@ import streamlit as st
 root = os.getcwd()
 dir_list = os.listdir(cwd)
 
-def AppRootDir()
+def AppRootDir():
     return root
 
-def VideoDir()
+def VideoDir():
     return os.chdir( cwd + '/Detected') 
 
-def WriteTextFile()
+def WriteTextFile():
     VideoDir()
     f = open("guru99.txt","w+")
 
