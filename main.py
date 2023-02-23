@@ -58,8 +58,8 @@ def detect_image(imagefile):
     image_updated = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = model(image_updated)
     results.print()
-        img_base64 = Image.fromarray(img)
-        img_base64.save(bytes_io, format="jpeg")
+    img_base64 = Image.fromarray(img)
+    img_base64.save(bytes_io, format="jpeg")
     return bytes_io.getvalue()
 
     results.render()  # updates results.imgs with boxes and labels
