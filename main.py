@@ -75,7 +75,7 @@ def detect_video(videofile):
     generatedvideomp4file = "generatedvideo.mp4"
     
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    fourcc = cv2.VideoWriter_fourcc(*'vp80')
     out = cv2.VideoWriter(generatedvideomp4file, fourcc, fps, (frame_width, frame_height),True)
     
     progress_text = "Video Frames being detected."
