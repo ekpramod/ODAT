@@ -5,8 +5,8 @@ def Options():
 
     user_input_dict = {}
 
-    user_input_dict["input_file"] = "generatedvideo.avi"
-    user_input_dict["output_file"] = "generatedvideo.mp4"
+    user_input_dict["input_file"] = "./generatedvideo.avi"
+    user_input_dict["output_file"] = "./generatedvideo.mp4"
     user_input_dict["video_codec"] = "libx264"
     user_input_dict["audio_codec"] = "aac" 
     user_input_dict["audio_bitrate"] = "196k"
