@@ -107,7 +107,7 @@ def detect_video(videofile):
 
     contents = ''
     if os.path.exists(generatedvideoavifile):
-        runFFmpeg(buildFFmpegCommand()) # video name with avi format convert to mp4 format
+        runFFmpeg(buildFFmpegCommand(generatedvideoavifile,generatedvideomp4file)) # video name with avi format convert to mp4 format
         with open(generatedvideomp4file, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
 
@@ -131,13 +131,16 @@ def track_video(videofile):
 
     filepath = f'{videofile.name}'
     savePath = run(weights='bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
+    runFFmpeg(buildFFmpegCommand(savePath,generatedvideomp4file)) # video name with avi format convert to mp4 format
+    print(savePath)
     # startfile(savePath)
     extension = filepath.split(".")[1]
-    with open(savePath, "rb") as f:
+    with open(generatedvideomp4file, "rb") as f:
         contents = f.read()  # file contents could be already fully loaded into RAM
     if extension != 'mp4':
         os.remove(filepath)
-        os.remove(filepath.replace(f".{extension}", ".mp4"))
+        #os.remove(filepath.replace(f".{extension}", ".mp4"))
+        os.remove(generatedvideomp4file)
     else:
         os.remove(filepath)
     shutil.rmtree("runs/")

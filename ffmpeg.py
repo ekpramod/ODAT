@@ -5,7 +5,7 @@ ffmpeg = 'ffmpeg'
 def Options():
 
     user_input_dict = {}
-
+    
     user_input_dict["input_file"] = "./generatedvideo.avi"
     user_input_dict["output_file"] = "./generatedvideo.mp4"
     user_input_dict["video_codec"] = "libx264"
@@ -18,9 +18,11 @@ def Options():
 
     return user_input_dict
 
-def buildFFmpegCommand():
+def buildFFmpegCommand(input_file,output_file):
 
     final_user_input = Options()
+    final_user_input["input_file"] = input_file
+    final_user_input["output_file"] = output_file
 
     commands_list = [
         ffmpeg,
