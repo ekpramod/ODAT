@@ -47,6 +47,7 @@ def detect_image(imagefile):
     image = cv2.imdecode(np.frombuffer(imagefile, np.uint8), cv2.IMREAD_COLOR)
     image_updated = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = model(image_updated)
+    results.render()
     for img in results.ims:
         bytes_io = io.BytesIO()
         img_base64 = Image.fromarray(img)
