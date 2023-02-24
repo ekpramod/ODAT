@@ -1,1 +1,0 @@
-Just an empty folder. It is under this folder the detected Images and Videos will be stored

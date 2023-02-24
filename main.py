@@ -7,7 +7,6 @@ import cv2
 import streamlit as st
 import numpy as np
 from detect_track import run
-import moviepy.editor as moviepy
 
 content = ''
 uploadedfilename = ''
@@ -48,9 +47,10 @@ def detect_image(imagefile):
     image = cv2.imdecode(np.frombuffer(imagefile, np.uint8), cv2.IMREAD_COLOR)
     image_updated = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = model(image_updated)
-    results.print()
-    img_base64 = Image.fromarray(img)
-    img_base64.save(bytes_io, format="jpeg")
+    for img in results.ims:
+        bytes_io = io.BytesIO()
+        img_base64 = Image.fromarray(img)
+        img_base64.save(bytes_io, format="jpeg")
     return bytes_io.getvalue()
 
     results.render()  # updates results.imgs with boxes and labels
@@ -105,7 +105,7 @@ def detect_video(videofile):
 
     contents = ''
     if os.path.exists(generatedvideoavifile):
-        converttomp4('generatedvideo') # video name without extension convert to mp4 format
+        runFFmpeg(buildFFmpegCommand()) # video name with avi format convert to mp4 format
         with open(generatedvideomp4file, "rb") as f:
             contents = f.read()  # file contents could be already fully loaded into RAM
 

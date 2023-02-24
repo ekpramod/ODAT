@@ -114,5 +114,3 @@ Werkzeug==2.2.3
 wrapt==1.14.1
 yolov5==7.0.9
 zipp==3.14.0
-imageio_ffmpeg
-moviepy
