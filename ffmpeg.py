@@ -1,5 +1,6 @@
 import subprocess
-import ffmpeg
+
+ffmpeg = 'ffmpeg'
 
 def Options():
 
