@@ -129,10 +129,12 @@ def track_video(videofile):
     with open(videofile.name, "wb") as buffer:
             shutil.copyfileobj(videofile, buffer)
 
+    generatedvideomp4file = "generatedvideo.mp4"
+    
     filepath = f'{videofile.name}'
     savePath = run(weights='bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
-    runFFmpeg(buildFFmpegCommand(savePath,generatedvideomp4file)) # video name with avi format convert to mp4 format
     print(savePath)
+    runFFmpeg(buildFFmpegCommand(savePath,generatedvideomp4file)) # video name with avi format convert to mp4 format
     # startfile(savePath)
     extension = filepath.split(".")[1]
     with open(generatedvideomp4file, "rb") as f:
