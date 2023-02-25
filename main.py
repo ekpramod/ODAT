@@ -132,8 +132,10 @@ def track_video(videofile):
     generatedvideomp4file = "generatedvideo.mp4"
     
     filepath = f'{videofile.name}'
-    savePath = run(weights='bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
-    print(savePath)
+    with st.spinner('Processing Video. Wait for it...'):
+        savePath = run(weights='bdd100Kv3.pt', source=filepath, data='configuration/BDD100K_100.yaml', conf_thres=conf_thres, iou_thres=iou_thres)
+    st.success('Done!')    
+    #print(savePath)
     runFFmpeg(buildFFmpegCommand(savePath,generatedvideomp4file)) # video name with avi format convert to mp4 format
     # startfile(savePath)
     extension = filepath.split(".")[1]
