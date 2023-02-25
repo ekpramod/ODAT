@@ -151,7 +151,7 @@ def track_video(videofile):
 #END CODE SECTION
 
 #BEGIN UI SECTION
-st.title('Object Detection and Tracking by IITH _:blue[Group4 2023]_')
+st.title('Object Detection and Tracking by IIITH _:blue[Group4 2023]_')
   
 with st.sidebar:
     with st.expander("Expand, Choose File (of type image or video) and Upload", expanded=True):
